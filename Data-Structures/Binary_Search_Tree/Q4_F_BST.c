@@ -91,7 +91,29 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	/* 스택을 사용한 후위 순회 출력 함수 */
+	Stack stack;
+	stack.top = NULL;
+	BSTNode *curr = root;
+	BSTNode *visited = NULL; 
+
+	if(root == NULL){
+		return;
+	}
+	while(!isEmpty(&stack) || curr != NULL){
+		if(curr != NULL){
+			push(&stack, curr);
+			curr = curr -> left;
+		} else{
+			BSTNode *peekNode = peek(&stack);
+			if(peekNode->right != NULL && visited != peekNode -> right){
+				curr = peekNode -> right;
+			} else{
+				printf("%d ", peekNode -> item);
+				visited = pop(&stack);
+			}
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
