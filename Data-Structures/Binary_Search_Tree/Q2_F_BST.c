@@ -88,10 +88,28 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void inOrderTraversal(BSTNode *root)
-{
-	 /* add your code here */
-}
+void inOrderTraversal(BSTNode *root){
+	/*스택을 사용해서 중위순회 출력*/
+	Stack stack;
+	stack.top = NULL;
+	BSTNode *current = root;
+  
+	// 트리를 순회할 때까지 반복
+	while (current != NULL || !isEmpty(&stack)) {
+	   // 현재 노드가 NULL이 아니면 왼쪽 자식으로 계속 내려가며 스택에 노드를 넣음
+	   while (current != NULL) {
+		  push(&stack, current);
+		  current = current->left;
+	   }
+  
+	   // 스택에서 노드를 꺼내어 출력하고 오른쪽 자식으로 이동
+	   current = pop(&stack);
+	   printf("%d ", current->item); // 노드 값 출력
+  
+	   // 오른쪽 자식으로 이동
+	   current = current->right;
+	}
+ }
 
 ///////////////////////////////////////////////////////////////////////////////
 

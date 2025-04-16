@@ -102,7 +102,25 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+   /* great-grandchild(증조손자)가 있는 노드를 찾아 그 값들을 출력 */
+    if (node == NULL) return -1;
+
+    int leftDepth = hasGreatGrandchild(node -> left);
+    int rightDepth = hasGreatGrandchild(node -> right);
+    
+    int maxDepth;
+
+    if (leftDepth > rightDepth)
+        maxDepth = leftDepth + 1;
+    else
+        maxDepth = rightDepth + 1;
+
+    if (maxDepth >= 3) {
+        printf("%d\n", node->item);
+    }
+
+
+    return maxDepth;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -100,10 +100,20 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int sumOfOddNodes(BTNode *node)
+int sumOfOddNodes(BTNode *node){
+    if (node == NULL)
+    return 0;
 
-{
-    /* add your code here */
+    int result = 0;
+
+    if (node->item % 2 == 1)
+        result += node->item;
+
+    result += sumOfOddNodes(node->left);
+    result += sumOfOddNodes(node->right);
+
+    return result;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -112,7 +112,22 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	/* 큐에 들어가있는 값을 스택을 써서 역순으로 출력 */
+	Stack s;
+	
+	s.ll.head = NULL;
+    s.ll.size = 0;
+    s.ll.tail = NULL;
+
+	while(!isEmptyQueue(q)){
+		int cur = dequeue(q);
+		push(&s, cur);
+	}
+
+    while (!isEmptyStack(&s)) {
+        int cur = pop(&s);
+        enqueue(q, cur);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

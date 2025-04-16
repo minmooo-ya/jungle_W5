@@ -116,14 +116,29 @@ void removeUntil(Stack *s, int value)
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void removeAllItemsFromStack(Stack *s)
+void removeUntil(Stack *s, int value)
 {
-	if (s == NULL)
-		return;
-	while (s->ll.head != NULL)
-	{
-		pop(s);
-	}
+    // 1. 스택에서 값들을 pop하면서 원하는 값 찾기
+    int found = 0;
+    while (!isEmptyStack(s)) {
+        int cur = pop(s);
+
+        // 2. 값이 나오면 그것을 다시 스택에 넣고 종료
+        if (cur == value) {
+            push(s, cur);
+            found = 1;
+            break;
+        }
+    }
+    
+    // 3. value를 찾았으면 그 이후 값을 다시 스택에 넣기
+    if (found) {
+        // value 이후의 값들은 다시 넣는다
+        while (!isEmptyStack(s)) {
+            int cur = pop(s);
+            push(s, cur);  // value 이후 값들을 다시 스택에 넣음
+        }
+    }
 }
 
 

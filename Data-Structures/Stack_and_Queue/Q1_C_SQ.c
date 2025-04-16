@@ -114,14 +114,36 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+//연결리스트의 값을 큐에 넣는 함수
+//그냥 돌면서 queue에 넣으십쇼
+
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	removeAllItemsFromQueue(q);
+	
+    ListNode *cur = ll->head;
+
+    while (cur != NULL) {
+		enqueue(q, cur->item);
+        cur = cur->next;
+    }
 }
+
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	/*큐에서 홀수 값을 제거하는 함수*/
+	int item;
+	int size = q->ll.size;
+
+	for(int i=0; i<size; i++){
+		item = dequeue(q);
+
+		if(item % 2 ==0){
+			enqueue(q,item);
+		}
+	}
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

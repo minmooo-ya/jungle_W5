@@ -93,8 +93,32 @@ int main()
 
 void levelOrderTraversal(BSTNode* root)
 {
+    /* 루트부터 시작해서 트리의 각 레벨별로 왼쪽에서 오른쪽 순서대로 노드의 값을 출력하는 함수 */
+   if (root == NULL) return;
 
-    /* add your code here */
+    QueueNode *head = NULL;
+    QueueNode *tail = NULL;
+
+    // 먼저 루트 노드를 큐에 추가
+    enqueue(&head, &tail, root);
+
+    // 큐가 빌 때까지 반복
+    while (!isEmpty(head)) {
+        // 큐에서 노드를 꺼냄
+        BSTNode *current = dequeue(&head, &tail);
+
+        // 현재 노드의 값 출력
+        printf("%d ", current->item);
+
+        // 왼쪽 자식이 있으면 큐에 추가
+        if (current->left != NULL)
+            enqueue(&head, &tail, current->left);
+
+        // 오른쪽 자식이 있으면 큐에 추가
+        if (current->right != NULL)
+            enqueue(&head, &tail, current->right);
+    }
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

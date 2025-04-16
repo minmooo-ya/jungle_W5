@@ -113,12 +113,34 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+    removeAllItemsFromStack(s);
+    ListNode *cur = ll->head;
+
+    // 연결 리스트를 순회하면서 값을 스택에 푸시한다
+    while (cur != NULL) {  // 마지막 노드까지 순회
+        push(s, cur->item);
+        cur = cur->next;
+    }
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	Stack tempStack;
+    tempStack.ll.size = 0;
+    tempStack.ll.head = NULL;
+
+    // 기존 스택에서 값들을 하나씩 꺼내어 짝수는 버리고 임시 스택에 푸시
+    while (!isEmptyStack(s)) {
+        int item = pop(s);
+        if (item % 2 != 0) {
+            push(&tempStack, item);
+        }
+    }
+
+    // 임시 스택에 남은 값들을 다시 원래 스택에 넣기 (뒤집혀서 들어감)
+    while (!isEmptyStack(&tempStack)) {
+        push(s, pop(&tempStack));
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

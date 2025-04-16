@@ -104,8 +104,37 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+    Stack s;
+    s.ll.head = NULL;
+    s.ll.size = 0;
+
+    for (int i = 0; expression[i] != '\0'; i++) {
+        char ch = expression[i];
+
+        if (ch == '(' || ch == '[' || ch == '{') {
+            push(&s, ch);  // char은 int로 암시적 변환됨 (괜찮음)
+        } else if (ch == ')' || ch == ']' || ch == '}') {
+            if (isEmptyStack(&s)) {
+                return 1; // 스택이 비어있으면 불균형
+            }
+
+            char top = pop(&s);  // pop() 결과도 int → char로 저장
+
+            if ((ch == ')' && top != '(') ||
+                (ch == ']' && top != '[') ||
+                (ch == '}' && top != '{')) {
+                return 1;
+            }
+        }
+    }
+
+    if (!isEmptyStack(&s)) {
+        return 1; // 스택에 여는 괄호가 남았으면 불균형
+    }
+
+    return 0; // 균형 잘 맞음
 }
+
 
 ////////////////////////////////////////////////////////////
 

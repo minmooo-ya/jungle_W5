@@ -105,9 +105,15 @@ int main()
 
 void printSmallerValues(BTNode *node, int m)
 {
-	/* add your code here */
+   /* 특정 값보다 작은 값들만 출력 */
+    if (node == NULL) return;
+    
+    if(node -> item < m){
+        printf("%d ", node -> item);
+    }
+    printSmallerValues(node->left, m);
+    printSmallerValues(node->right, m);
 }
-
 //////////////////////////////////////////////////////////////////////////////////
 
 BTNode *createBTNode(int item)

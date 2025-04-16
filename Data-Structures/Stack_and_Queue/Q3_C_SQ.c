@@ -103,7 +103,25 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+  /* 두 수가 연속된 수인지 확인하는 함수(EX) 15-16) 
+  	 그럼 스택에서 빼면서 차이가 1인지를 확인
+	 두 개씩 짝지어서 차이가 1이면 
+	 The stack is pairwise consecutive 출력
+	 홀수면 그냥 not출력*/
+	while(!isEmptyStack(s)){
+		int cur1 = pop(s);
+
+		if(isEmptyStack(s)){
+			return 0;
+		}
+
+		int cur2 = pop(s);
+		if(abs(cur1 - cur2) != 1){
+			return 0;
+		}
+	}
+	return 1;
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////

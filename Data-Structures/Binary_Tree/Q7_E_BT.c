@@ -102,7 +102,21 @@ int main()
 
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+    /*가장 작은 값을 찾는 함수*/
+    if (node == NULL){
+        return __INT_MAX__;
+    }
+
+    int leftMin = smallestValue(node->left);
+    int rightMin = smallestValue(node->right);
+
+    // 현재 노드, 왼쪽 자식, 오른쪽 자식 중 최소값 반환
+    int minV = node->item;
+    if (leftMin < minV) minV = leftMin;
+    if (rightMin < minV) minV = rightMin;
+
+
+    return minV;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
